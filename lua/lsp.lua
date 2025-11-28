@@ -12,7 +12,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local keymap = vim.keymap
         local lsp = vim.lsp
 	    local bufopts = { noremap = true, silent = true }
-
         keymap.set("n", "gr", lsp.buf.references, bufopts)
         keymap.set("n", "gd", lsp.buf.definition, bufopts)
         keymap.set("n", "<space>rn", lsp.buf.rename, bufopts)
@@ -23,4 +22,4 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
-vim.lsp.enable({ "ty" })
+vim.lsp.enable({ "pyright", "typescript_lsp" })

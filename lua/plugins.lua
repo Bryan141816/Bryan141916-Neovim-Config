@@ -187,6 +187,32 @@ require("lazy").setup({
       },
       build = "make",
       config = require('configs/telescope_config'),
+    },
+    {
+      "numToStr/Comment.nvim",
+      config = function()
+        require('Comment').setup({
+          toggler = {
+            line = '<leader>/',
+          },
+          opleader = {
+            line = '<leader>/',
+          },
+        })
+      end,
+    },
+    {
+        "windwp/nvim-autopairs",
+        config = function()
+            require('nvim-autopairs').setup({
+                check_ts = true,  -- use Treesitter to detect pairs in code
+                fast_wrap = {},
+            })
+        end
+    },
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use latest stable
     }
 
 })

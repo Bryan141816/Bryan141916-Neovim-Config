@@ -40,7 +40,18 @@ return function()
     sections = {
       lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
       lualine_b = { 'filename', 'branch' },
-      lualine_c = { '%=' }, -- add center components here if you want
+      lualine_c = {
+          {'filename'},
+          {
+            'diagnostics',
+            sources = {'nvim_lsp'},  -- Use LSP diagnostics
+            sections = {'error', 'warn', 'info', 'hint'},
+            symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '},
+            colored = true,          -- Colorize diagnostics
+            update_in_insert = false, -- Update in insert mode
+            always_visible = true,
+          }
+      },
       lualine_x = {},
       lualine_y = { 'filetype', 'progress' },
       lualine_z = { { 'location', separator = { right = '' }, left_padding = 2 } },
