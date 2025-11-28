@@ -70,7 +70,21 @@ require("lazy").setup({
         vim.cmd("colorscheme kanagawa")  -- <-- must call this
       end,
     },
-    {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
+
+    {
+        "nvim-treesitter/nvim-treesitter",
+        branch = 'master',
+        lazy = false,
+        build = ":TSUpdate",
+        config = function()
+            require('nvim-treesitter.configs').setup({
+                ensure_installed = { "html", "javascript", "typescript", "tsx", "vue" },
+                highlight = { enable = true },
+                autotag = { enable = true },  -- 🔑 enable autotag here
+            })
+        end
+    },
+
     {
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v3.x",
@@ -213,6 +227,17 @@ require("lazy").setup({
     {
         "kylechui/nvim-surround",
         version = "*", -- Use latest stable
+    },
+    {
+        "windwp/nvim-ts-autotag",
+        ft = { "html", "javascript", "typescriptreact", "javascriptreact", "vue" }, -- lazy-load for these filetypes
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = function()
+            require('nvim-ts-autotag').setup({
+                filetypes = { "html", "javascript", "typescriptreact", "javascriptreact", "vue" },
+                skip_tags = { "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr" },
+            })
+        end,
     }
 
 })
