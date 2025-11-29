@@ -60,14 +60,17 @@ require("lazy").setup({
     },
     { "mason-org/mason.nvim", opts={} },
     {
-      "rebelot/kanagawa.nvim",
+      'uloco/bluloco.nvim',
       lazy = false,
       priority = 1000,
+      dependencies = { 'rktjmp/lush.nvim' },
       config = function()
-        require("kanagawa").setup({
-          compile = false,
+        require("bluloco").setup({
+            style = "dark",       
+            transparent = false,  
         })
-        vim.cmd("colorscheme kanagawa")  -- <-- must call this
+        vim.cmd("colorscheme bluloco")
+        vim.opt.fillchars:append("eob: ")
       end,
     },
 
@@ -107,6 +110,8 @@ require("lazy").setup({
 
         -- Keymap: Ctrl + n to toggle
         vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", { noremap = true, silent = true })
+        vim.keymap.set("i", "<C-n>", "<Esc>:Neotree toggle<CR>a", { noremap = true, silent = true })
+        vim.keymap.set("s", "<C-n>", "<Esc>:Neotree toggle<CR>gv", { noremap = true, silent = true })
 
         -- Optional: reveal current file with <leader>r
         vim.keymap.set("n", "<leader>r", ":Neotree reveal<CR>", { noremap = true, silent = true })
