@@ -35,9 +35,18 @@ vim.opt.splitbelow = true           -- open new vertical split bottom
 vim.opt.splitright = true           -- open new horizontal splits right
 -- vim.opt.termguicolors = true        -- enable 24-bit RGB color in the TUI
 vim.opt.showmode = false            -- we are experienced, wo don't need the "-- INSERT --" mode hint
-
 -- Searching
 vim.opt.incsearch = true            -- search as characters are entered
 vim.opt.hlsearch = false            -- do not highlight matches
 vim.opt.ignorecase = true           -- ignore case in searches by default
 vim.opt.smartcase = true            -- but make it case sensitive if an uppercase is entered
+
+
+vim.diagnostic.config({
+  virtual_text = true, -- Enables inline diagnostic messages
+  signs = false,        -- Enables signs in the gutter
+  underline = true,    -- Underlines problematic code
+  update_in_insert = false, -- Updates diagnostics only in normal mode
+  severity_sort = true -- Sorts diagnostics by severity
+})
+

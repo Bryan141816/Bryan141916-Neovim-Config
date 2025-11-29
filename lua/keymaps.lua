@@ -25,7 +25,6 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', opts)
 -----------------
 -- Visual mode --
 -----------------
-
 -- Hint: start visual mode with the same area as the previous area and the same mode
 vim.keymap.set('v', '<', '<gv', opts)
 vim.keymap.set('v', '>', '>gv', opts)
@@ -45,6 +44,22 @@ vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a", { noremap = true, silent = true })
 
 -- Optional: also save in visual mode
 vim.keymap.set("v", "<C-s>", "<Esc>:w<CR>gv", { noremap = true, silent = true })
+
+
+-- Undo Ctrl-z
+vim.keymap.set("n", "<C-z>", ":u<CR>", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-z>", "<Esc>:u<CR>a", { noremap = true, silent = true })
+vim.keymap.set("v", "<C-z>", "<Esc>:w<CR>gv", { noremap = true, silent = true })
+
+
+-- Redo Ctrl-r
+-- Normal mode
+
+-- Insert mode
+vim.keymap.set("i", "<C-r>", "<Esc><C-r>a", { noremap = true, silent = true })
+
+-- Visual mode
+vim.keymap.set("v", "<C-r>", "<Esc><C-r>gv", { noremap = true, silent = true })
 
 -- Open LazyGit in a floating terminal
 vim.keymap.set("n", "<leader>gg", function()

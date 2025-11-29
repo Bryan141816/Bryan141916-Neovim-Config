@@ -164,6 +164,11 @@ require("lazy").setup({
         vim.o.showtabline = 2
 
         require('bufferline').setup{
+          highlights = {
+                buffer_selected = {
+                    italic = false,
+                },
+          },
           options = {
             always_show_bufferline = true,
             diagnostics = "nvim_lsp",
@@ -209,7 +214,7 @@ require("lazy").setup({
           toggler = {
             line = '<leader>/',
           },
-          opleader = {
+          opleader = { 
             line = '<leader>/',
           },
         })
@@ -238,6 +243,30 @@ require("lazy").setup({
                 skip_tags = { "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr" },
             })
         end,
-    }
+    },
+     {
+    "brenoprata10/nvim-highlight-colors",
+    config = function()      
+        require("nvim-highlight-colors").setup({
+            render = 'virtual',
+            virtual_symbol = '■',
+            enable_tailwind = true,
+        })
+    end,
+  },
+  {
+    "gorbit99/codewindow.nvim",
+    config = function()
+      local cw = require("codewindow")
+      cw.setup({
+        -- your config options here if needed
+      })
+
+      -- keymap to toggle minimap
+      vim.keymap.set("n", "<leader>mm", function()
+        cw.toggle_minimap()
+      end, { noremap = true, silent = true, desc = "Toggle Codewindow Minimap" })
+    end,
+  }
 
 })
