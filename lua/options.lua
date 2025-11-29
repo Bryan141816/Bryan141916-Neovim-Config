@@ -49,34 +49,3 @@ vim.diagnostic.config({
   update_in_insert = false, -- Updates diagnostics only in normal mode
   severity_sort = true -- Sorts diagnostics by severity
 })
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = {"*.png", "*.jpg", "*.jpeg", "*.bmp", "*.gif"},
-    callback = function()
-        local sys = vim.loop.os_uname().sysname
-        if sys == "Windows_NT" then
-            -- Skip image.nvim on Windows
-            return
-        end
-
-        -- Open in a floating buffer in the center
-        local buf = vim.api.nvim_get_current_buf()
-        local width = math.floor(vim.o.columns * 0.7)
-        local height = math.floor(vim.o.lines * 0.7)
-        local row = math.floor((vim.o.lines - height) / 2)
-        local col = math.floor((vim.o.columns - width) / 2)
-
-        local win = vim.api.nvim_open_win(buf, true, {
-            relative = 'editor',
-            width = width,
-            height = height,
-            row = row,
-            col = col,
-            style = 'minimal',
-            border = 'rounded',
-        })
-
-        require("image").display(buf)
-    end,
-})
-

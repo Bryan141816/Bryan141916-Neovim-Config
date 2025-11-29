@@ -13,18 +13,11 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        "uloco/bluloco.nvim",
+        "catppuccin/nvim",
         lazy = false,
         priority = 1000,
-        dependencies = { "rktjmp/lush.nvim" },
         config = function()
-            require("bluloco").setup({
-                style = "dark",       -- "dark" or "light"
-                transparent = false,  -- true to remove background
-            })
-            vim.cmd("colorscheme bluloco")
-
-            -- Hide the tildes at the end of buffer
+            vim.cmd.colorscheme "catppuccin"
             vim.opt.fillchars:append("eob: ")
         end,
     },
@@ -242,17 +235,4 @@ require("lazy").setup({
       end, { noremap = true, silent = true, desc = "Toggle Codewindow Minimap" })
     end,
   },
-  {
-    "3rd/image.nvim",
-    config = function()
-        require("image").setup({
-            render = {
-                min_padding = 5,  -- padding around image
-                show_label = false,
-            },
-        })
-    end,
-    ft = {"png", "jpg", "jpeg", "bmp", "gif"}, -- only load for image filetypes
-}
-
 })
