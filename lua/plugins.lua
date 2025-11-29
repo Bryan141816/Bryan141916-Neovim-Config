@@ -13,6 +13,22 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
+        "uloco/bluloco.nvim",
+        lazy = false,
+        priority = 1000,
+        dependencies = { "rktjmp/lush.nvim" },
+        config = function()
+            require("bluloco").setup({
+                style = "dark",       -- "dark" or "light"
+                transparent = false,  -- true to remove background
+            })
+            vim.cmd("colorscheme bluloco")
+
+            -- Hide the tildes at the end of buffer
+            vim.opt.fillchars:append("eob: ")
+        end,
+    },
+    {
         "saghen/blink.cmp",
         dependencies = {"rafamadriz/friendly-snippets"},
 
@@ -59,21 +75,6 @@ require("lazy").setup({
         opts_extend = { "sources.default" },
     },
     { "mason-org/mason.nvim", opts={} },
-    {
-      'uloco/bluloco.nvim',
-      lazy = false,
-      priority = 1000,
-      dependencies = { 'rktjmp/lush.nvim' },
-      config = function()
-        require("bluloco").setup({
-            style = "dark",       
-            transparent = false,  
-        })
-        vim.cmd("colorscheme bluloco")
-        vim.opt.fillchars:append("eob: ")
-      end,
-    },
-
     {
         "nvim-treesitter/nvim-treesitter",
         branch = 'master',
@@ -164,39 +165,7 @@ require("lazy").setup({
       'akinsho/bufferline.nvim',
       version = "*",
       dependencies = 'nvim-tree/nvim-web-devicons',
-      config = function()
-        vim.opt.termguicolors = true
-        vim.o.showtabline = 2
-
-        require('bufferline').setup{
-          highlights = {
-                buffer_selected = {
-                    italic = false,
-                },
-          },
-          options = {
-            always_show_bufferline = true,
-            diagnostics = "nvim_lsp",
-            show_buffer_close_icons = true,
-            show_close_icon = false,
-            separator_style = "slant",
-            offsets = {
-              {
-                filetype = "neo-tree",
-                text = "Explorer",
-                highlight = "Directory",
-                text_align = "left"
-              }
-            },
-          },
-        }
-
-        -- Keymaps to switch buffers
-        vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { silent = true })
-        vim.keymap.set('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { silent = true })
-
-        vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { silent = true })
-      end
+      config = require('configs.bufferline')    
     },
     {
       "akinsho/toggleterm.nvim",
@@ -272,6 +241,18 @@ require("lazy").setup({
         cw.toggle_minimap()
       end, { noremap = true, silent = true, desc = "Toggle Codewindow Minimap" })
     end,
-  }
+  },
+  {
+    "3rd/image.nvim",
+    config = function()
+        require("image").setup({
+            render = {
+                min_padding = 5,  -- padding around image
+                show_label = false,
+            },
+        })
+    end,
+    ft = {"png", "jpg", "jpeg", "bmp", "gif"}, -- only load for image filetypes
+}
 
 })

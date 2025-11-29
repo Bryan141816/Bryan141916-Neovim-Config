@@ -51,10 +51,6 @@ vim.keymap.set("n", "<C-z>", ":u<CR>", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-z>", "<Esc>:u<CR>a", { noremap = true, silent = true })
 vim.keymap.set("v", "<C-z>", "<Esc>:w<CR>gv", { noremap = true, silent = true })
 
-
--- Redo Ctrl-r
--- Normal mode
-
 -- Insert mode
 vim.keymap.set("i", "<C-r>", "<Esc><C-r>a", { noremap = true, silent = true })
 
@@ -98,4 +94,12 @@ vim.keymap.set("n", "<leader>gg", function()
     vim.api.nvim_buf_set_keymap(buf, "t", "<C-c>", "<C-\\><C-n><cmd>close<CR>", { noremap = true, silent = true })
 end, { noremap = true, silent = true })
 
+-- Move current line up
+vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", opts)
+-- Move current line down
+vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", opts)
 
+-- Move selected block up in visual mode
+vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
+-- Move selected block down in visual mode
+vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", opts)
