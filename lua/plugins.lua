@@ -268,28 +268,33 @@ require("lazy").setup({
 	------------------------
 	--Formatting / Tooling--
 	------------------------
+
 	{
 		"stevearc/conform.nvim",
 		config = function()
-			require("conform").setup({
+			local conform = require("conform")
+
+			conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
 					python = { "black" },
+					html = { "prettier" },
 					javascript = { "prettier" },
 					javascriptreact = { "prettier" },
 					typescript = { "prettier" },
 					typescriptreact = { "prettier" },
+					bash = { "shfmt" },
 				},
 			})
-		end,
-	},
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		config = function()
-			require("mason-tool-installer").setup({
-				ensure_installed = { "stylua", "prettier", "black" },
-				auto_update = true,
-			})
+
+			-- Export to global so mason-tool-installer can use it
+			vim.g.conform_formatters = {}
+
+			for _, list in pairs(conform.formatters_by_ft) do
+				for _, f in ipairs(list) do
+					vim.g.conform_formatters[f] = true
+				end
+			end
 		end,
 	},
 })

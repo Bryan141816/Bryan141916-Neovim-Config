@@ -177,3 +177,39 @@ vim.keymap.set("n", "<leader>gg", function()
 	vim.api.nvim_buf_set_keymap(buf, "t", "<Esc>", "<C-\\><C-n><cmd>close<CR>", { noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(buf, "t", "<C-c>", "<C-\\><C-n><cmd>close<CR>", { noremap = true, silent = true })
 end, { noremap = true, silent = true })
+
+-- Open Posting in a floating terminal
+
+vim.keymap.set("n", "<leader>pp", function()
+	local buf = vim.api.nvim_create_buf(false, true)
+
+	local width = math.floor(vim.o.columns * 0.8)
+	local height = math.floor(vim.o.lines * 0.8)
+	local row = math.floor((vim.o.lines - height) / 2)
+	local col = math.floor((vim.o.columns - width) / 2)
+
+	local win = vim.api.nvim_open_win(buf, true, {
+		relative = "editor",
+		width = width,
+		height = height,
+		row = row,
+		col = col,
+		style = "minimal",
+		border = "rounded",
+	})
+
+	-- Properly attach terminal to the floating buffer
+	vim.fn.termopen("posting")
+
+	-- Go into insert mode in terminal
+	vim.api.nvim_set_current_win(win)
+	vim.cmd("startinsert")
+
+	-- Close mappings
+	local opts = { noremap = true, silent = true }
+	local mappings = { "q","<Esc>" "<C-c>" }
+	for _, key in ipairs(mappings) do
+		vim.api.nvim_buf_set_keymap(buf, "n", key, "<cmd>close<CR>", opts)
+		vim.api.nvim_buf_set_keymap(buf, "t", key, "<C-\\><C-n><cmd>close<CR>", opts)
+	end
+end, { noremap = true, silent = true })
