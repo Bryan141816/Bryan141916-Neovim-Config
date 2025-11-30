@@ -52,6 +52,53 @@ require("lazy").setup({
 		end,
 	},
 
+	{
+		"rcarriga/nvim-notify",
+		config = function()
+			vim.notify = require("notify")
+		end,
+	},
+
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+		config = function()
+			require("noice").setup({
+				lsp = {
+					override = {
+						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+						["vim.lsp.util.stylize_markdown"] = true,
+						["cmp.entry.get_documentation"] = true,
+					},
+				},
+
+				-- ⭐ This makes all messages go to notifications
+				notify = {
+					enabled = true,
+					view = "notify",
+				},
+
+				messages = {
+					enabled = true,
+					view = "notify", -- show all default nvim messages as notifications
+				},
+
+				-- (Optional) Remove the command-line messages clutter
+				cmdline = {
+					view = "cmdline_popup",
+				},
+
+				presets = {
+					lsp_doc_border = true,
+				},
+			})
+		end,
+	},
+
 	-------------------------
 	--Completion / Snippets--
 	-------------------------
@@ -97,7 +144,6 @@ require("lazy").setup({
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = { "html", "javascript", "typescript", "tsx", "vue" },
 				highlight = { enable = true },
-				autotag = { enable = true },
 			})
 		end,
 	},
@@ -107,6 +153,11 @@ require("lazy").setup({
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("nvim-ts-autotag").setup({
+				opts = {
+					enable_close = true,
+					enable_rename = true,
+					enable_close_on_slash = true,
+				},
 				filetypes = { "html", "javascript", "typescriptreact", "javascriptreact", "vue" },
 				skip_tags = {
 					"area",
@@ -140,6 +191,7 @@ require("lazy").setup({
 		config = function()
 			require("neo-tree").setup({
 				filesystem = { filtered_items = { hide_dotfiles = false, hide_gitignored = false } },
+				close_if_last_window = true,
 			})
 			vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", { noremap = true, silent = true })
 			vim.keymap.set("i", "<C-n>", "<Esc>:Neotree toggle<CR>a", { noremap = true, silent = true })

@@ -9,6 +9,7 @@ return function()
 			lualine_a = { "mode" },
 			lualine_b = { "branch", "diff" },
 			lualine_c = {
+				"filetype",
 				"filename",
 				{
 					"diagnostics",
@@ -17,6 +18,8 @@ return function()
 					colored = true, -- colors come from the theme
 					update_in_insert = false,
 				},
+			},
+			lualine_x = {
 				{
 					function()
 						local msg = "No Active LSP"
@@ -36,7 +39,6 @@ return function()
 					icon = " LSP:",
 				},
 			},
-			lualine_x = { "filetype" },
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
 		},

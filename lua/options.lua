@@ -59,3 +59,28 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		require("conform").format({ async = false })
 	end,
 })
+vim.api.nvim_create_user_command("BQ", function()
+	local win = vim.api.nvim_get_current_win()
+	local buf = vim.api.nvim_win_get_buf(win)
+	local name = vim.api.nvim_buf_get_name(buf)
+	local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+	local bt = vim.api.nvim_buf_get_option(buf, "buftype")
+	local modified = vim.api.nvim_buf_get_option(buf, "modified")
+
+	if ft == "neo-tree" then
+		vim.cmd("close")
+		return
+	end
+
+	if modified then
+		vim.notify("Buffer has unsaved changes! Save or discard first.", vim.log.levels.WARN)
+		return
+	end
+
+	-- Safe close without messing layout
+	vim.cmd("bdelete!")
+end, { bang = true })
+
+vim.cmd([[
+cnoreabbrev <expr> q getcmdtype() == ':' && getcmdline() == 'q' ? 'BQ' : 'q'
+]])
