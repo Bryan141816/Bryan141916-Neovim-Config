@@ -26,6 +26,7 @@ require("lazy").setup({
 			vim.opt.fillchars:append("eob: ")
 		end,
 	},
+
 	{
 		"brenoprata10/nvim-highlight-colors",
 		config = function()
@@ -55,7 +56,15 @@ require("lazy").setup({
 	{
 		"rcarriga/nvim-notify",
 		config = function()
-			vim.notify = require("notify")
+			local notify = require("notify")
+
+			notify.setup({
+				stages = "fade_in_slide_out",
+				render = "wrapped-default",
+				timeout = 2000,
+				fps = 60,
+			})
+			vim.notify = notify
 		end,
 	},
 

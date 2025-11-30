@@ -207,7 +207,7 @@ vim.keymap.set("n", "<leader>pp", function()
 
 	-- Close mappings
 	local opts = { noremap = true, silent = true }
-	local mappings = { "q","<Esc>" "<C-c>" }
+	local mappings = { "q", "<Esc>", "<C-c>" }
 	for _, key in ipairs(mappings) do
 		vim.api.nvim_buf_set_keymap(buf, "n", key, "<cmd>close<CR>", opts)
 		vim.api.nvim_buf_set_keymap(buf, "t", key, "<C-\\><C-n><cmd>close<CR>", opts)
