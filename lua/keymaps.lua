@@ -3,79 +3,80 @@ local opts = {
 	noremap = true, -- non-recursive
 	silent = true, -- do not show message
 }
------------------
--- Normal mode --
------------------
+local map = vim.keymap.set
 
 -- Better window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+map("n", "<C-h>", "<C-w>h", opts)
+map("n", "<C-j>", "<C-w>j", opts)
+map("n", "<C-k>", "<C-w>k", opts)
+map("n", "<C-l>", "<C-w>l", opts)
 
 -- Resize with arrows
-vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+map("n", "<C-Up>", ":resize -2<CR>", opts)
+map("n", "<C-Down>", ":resize +2<CR>", opts)
+map("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+map("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -----------------
 -- Visual mode --
 -----------------
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
-vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
 
-vim.keymap.set({ "v", "s" }, "<Up>", "k", { noremap = true, silent = true })
-vim.keymap.set({ "v", "s" }, "<Down>", "j", { noremap = true, silent = true })
-vim.keymap.set({ "v", "s" }, "<Left>", "h", { noremap = true, silent = true })
-vim.keymap.set({ "v", "s" }, "<Right>", "l", { noremap = true, silent = true })
+map("v", "<", "<gv", opts)
+map("v", ">", ">gv", opts)
+map("n", "<Space>", "<Nop>", opts)
+
+map({ "v", "s" }, "<Up>", "k", opts)
+map({ "v", "s" }, "<Down>", "j", opts)
+map({ "v", "s" }, "<Left>", "h", opts)
+map({ "v", "s" }, "<Right>", "l", opts)
 
 ------------------
---Coding Keymap--
+-- Coding Keymap --
 ------------------
 
--- Save file with Ctrl+S in normal mode
-vim.keymap.set("n", "<C-s>", ":w<CR>", { noremap = true, silent = true }) --Normal mode keymap
-vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a", { noremap = true, silent = true }) --Insert mode keymap
-vim.keymap.set("v", "<C-s>", "<Esc>:w<CR>gv", { noremap = true, silent = true }) --Visual mode keymap
+map("n", "<C-s>", ":w<CR>", opts)
+map("i", "<C-s>", "<Esc>:w<CR>a", opts)
+map("v", "<C-s>", "<Esc>:w<CR>gv", opts)
 
--- Undo Ctrl-z
-vim.keymap.set("n", "<C-z>", ":u<CR>", { noremap = true, silent = true }) --Normal mode keymap
-vim.keymap.set("i", "<C-z>", "<Esc>:u<CR>a", { noremap = true, silent = true }) --Insert mode keymap
-vim.keymap.set("v", "<C-z>", "<Esc>:w<CR>gv", { noremap = true, silent = true }) --Visual mode keymap
+map("n", "<C-z>", ":u<CR>", opts)
+map("i", "<C-z>", "<Esc>:u<CR>a", opts)
+map("v", "<C-z>", ":u<CR>gv", opts)
 
--- Redo Ctrl-r
-vim.keymap.set("i", "<C-r>", "<Esc><C-r>a", { noremap = true, silent = true }) --Insert mode keymap
-vim.keymap.set("v", "<C-r>", "<Esc><C-r>gv", { noremap = true, silent = true }) --Visual mode keymap
+map("i", "<C-r>", "<Esc><C-r>a", opts)
+map("v", "<C-r>", "<Esc><C-r>gv", opts)
 
--- Shift-Arrow enter visual mode
-vim.keymap.set("n", "<S-Up>", "v<Up>", { noremap = true, silent = true })
-vim.keymap.set("n", "<S-Down>", "v<Down>", { noremap = true, silent = true })
-vim.keymap.set("n", "<S-Left>", "v<Left>", { noremap = true, silent = true })
-vim.keymap.set("n", "<S-Right>", "v<Right>", { noremap = true, silent = true })
+-- Shift + Arrow enter visual mode
+map("n", "<S-Up>", "v<Up>", opts)
+map("n", "<S-Down>", "v<Down>", opts)
+map("n", "<S-Left>", "v<Left>", opts)
+map("n", "<S-Right>", "v<Right>", opts)
 
--- Shift-Arrow enter visual mode (insert mode)
-vim.keymap.set("i", "<S-Up>", "<Esc>v<Up>", { noremap = true, silent = true })
-vim.keymap.set("i", "<S-Down>", "<Esc>v<Down>", { noremap = true, silent = true })
-vim.keymap.set("i", "<S-Left>", "<Esc>v<Left>", { noremap = true, silent = true })
-vim.keymap.set("i", "<S-Right>", "<Esc>v<Right>", { noremap = true, silent = true })
+map("i", "<S-Up>", "<Esc>v<Up>", opts)
+map("i", "<S-Down>", "<Esc>v<Down>", opts)
+map("i", "<S-Left>", "<Esc>v<Left>", opts)
+map("i", "<S-Right>", "<Esc>v<Right>", opts)
 
--- Move current line up
-vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", opts)
-vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
-
--- Move current line down
-vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", opts)
-vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", opts)
+-- Move lines
+map("n", "<A-Up>", ":m .-2<CR>==", opts)
+map("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
+map("i", "<A-Up>", "<Esc>:m .-2<CR>==gi", opts)
+map("n", "<A-Down>", ":m .+1<CR>==", opts)
+map("v", "<A-Down>", ":m '>+1<CR>gv=gv", opts)
+map("i", "<A-Down>", "<Esc>:m .+1<CR>==gi", opts)
 
 -------------------
---Buffer Controls--
+-- Buffer Controls --
 -------------------
 
--- Close all buffers
+local buffers = require("custom.buffers")
 
-vim.keymap.set("n", "<leader>ba", function()
+map("n", "<Tab>", ":BufferLineCycleNext<CR>", { silent = true })
+
+map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
+
+map("n", "<C-x>", buffers.safe_bdelete, { silent = true })
+
+map("n", "<leader>ba", function()
 	local current = vim.api.nvim_get_current_buf()
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 		if
@@ -86,10 +87,9 @@ vim.keymap.set("n", "<leader>ba", function()
 			vim.api.nvim_buf_delete(buf, { force = true })
 		end
 	end
-end, { noremap = true, silent = true, desc = "Close all buffers." })
+end, { desc = "Close all buffers." })
 
--- Close all buffers except current and special ones like Neo-tree
-vim.keymap.set("n", "<leader>bo", function()
+map("n", "<leader>bo", function()
 	local current = vim.api.nvim_get_current_buf()
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 		if
@@ -101,52 +101,94 @@ vim.keymap.set("n", "<leader>bo", function()
 			vim.api.nvim_buf_delete(buf, { force = true })
 		end
 	end
-end, { noremap = true, silent = true, desc = "Close others buffers." })
+end, { desc = "Close other buffers." })
 
--- Close buffers to the left of current
-vim.keymap.set("n", "<leader>bl", function()
+map("n", "<leader>bl", function()
 	local current = vim.api.nvim_get_current_buf()
-	local bufs = vim.api.nvim_list_bufs()
-
-	for _, buf in ipairs(bufs) do
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 		if
 			vim.api.nvim_buf_is_loaded(buf)
-			and buf ~= current
+			and buf < current
 			and vim.api.nvim_buf_get_option(buf, "buftype") == ""
 			and vim.api.nvim_buf_get_option(buf, "filetype") ~= "neo-tree"
 		then
-			if buf < current then
-				vim.api.nvim_buf_delete(buf, { force = true })
-			end
+			vim.api.nvim_buf_delete(buf, { force = true })
 		end
 	end
-end, { noremap = true, silent = true, desc = "Close buffers to the left." })
+end, { desc = "Close buffers to the left." })
 
--- Close buffers to the right of current
-vim.keymap.set("n", "<leader>br", function()
+map("n", "<leader>br", function()
 	local current = vim.api.nvim_get_current_buf()
-	local bufs = vim.api.nvim_list_bufs()
-
-	for _, buf in ipairs(bufs) do
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 		if
 			vim.api.nvim_buf_is_loaded(buf)
-			and buf ~= current
+			and buf > current
 			and vim.api.nvim_buf_get_option(buf, "buftype") == ""
 			and vim.api.nvim_buf_get_option(buf, "filetype") ~= "neo-tree"
 		then
-			if buf > current then
-				vim.api.nvim_buf_delete(buf, { force = true })
-			end
+			vim.api.nvim_buf_delete(buf, { force = true })
 		end
 	end
-end, { noremap = true, silent = true, desc = "Close buffers to the right." })
+end, { desc = "Close buffers to the right." })
+
+-------------
+--Telescope--
+-------------
+
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", {
+	noremap = true,
+	silent = true,
+	desc = "Find files",
+})
+
+map("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", {
+	noremap = true,
+	silent = true,
+	desc = "Search text (live grep)",
+})
+
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", {
+	noremap = true,
+	silent = true,
+	desc = "List buffers",
+})
+
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", {
+	noremap = true,
+	silent = true,
+	desc = "Help tags",
+})
+
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", {
+	noremap = true,
+	silent = true,
+	desc = "Recent files",
+})
+
+-----------
+--Neo Tree--
+------------
+
+map("n", "<C-n>", ":Neotree toggle<CR>", { noremap = true, silent = true })
+map("i", "<C-n>", "<Esc>:Neotree toggle<CR>a", { noremap = true, silent = true })
+map("s", "<C-n>", "<Esc>:Neotree toggle<CR>gv", { noremap = true, silent = true })
+map("n", "<leader>r", ":Neotree reveal<CR>", { noremap = true, silent = true, desc = "Open NeoTree" })
+
+------------
+--Terminal--
+------------
+
+local term = require("custom.terminal")
+
+map("n", "<A-h>", term.horiz_toggle, { noremap = true, silent = true })
+map("n", "<A-v>", term.vert_toggle, { noremap = true, silent = true })
+map("n", "<A-f>", term.float_toggle, { noremap = true, silent = true })
 
 ----------
---Others--
+-- Others --
 ----------
 
--- Open LazyGit in a floating terminal
-vim.keymap.set("n", "<leader>gg", function()
+map("n", "<leader>gg", function()
 	local buf = vim.api.nvim_create_buf(false, true)
 
 	local width = math.floor(vim.o.columns * 0.8)
@@ -165,21 +207,17 @@ vim.keymap.set("n", "<leader>gg", function()
 	})
 
 	vim.fn.termopen("lazygit")
-
 	vim.cmd("startinsert")
 
-	--Keymaps for closing lazygit--
-	vim.api.nvim_buf_set_keymap(buf, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(buf, "n", "<Esc>", "<cmd>close<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(buf, "n", "<C-c>", "<cmd>close<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(buf, "t", "q", "<C-\\><C-n><cmd>close<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(buf, "t", "<Esc>", "<C-\\><C-n><cmd>close<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(buf, "t", "<C-c>", "<C-\\><C-n><cmd>close<CR>", { noremap = true, silent = true })
-end, { noremap = true, silent = true, desc = "Open LazyGit." })
+	map("n", "q", "<cmd>close<CR>", { buffer = buf })
+	map("n", "<Esc>", "<cmd>close<CR>", { buffer = buf })
+	map("n", "<C-c>", "<cmd>close<CR>", { buffer = buf })
+	map("t", "q", "<C-\\><C-n><cmd>close<CR>", { buffer = buf })
+	map("t", "<Esc>", "<C-\\><C-n><cmd>close<CR>", { buffer = buf })
+	map("t", "<C-c>", "<C-\\><C-n><cmd>close<CR>", { buffer = buf })
+end, { desc = "Open LazyGit." })
 
--- Open Posting in a floating terminal
-
-vim.keymap.set("n", "<leader>pp", function()
+map("n", "<leader>pp", function()
 	local buf = vim.api.nvim_create_buf(false, true)
 
 	local width = math.floor(vim.o.columns * 0.8)
@@ -197,18 +235,17 @@ vim.keymap.set("n", "<leader>pp", function()
 		border = "rounded",
 	})
 
-	-- Properly attach terminal to the floating buffer
 	vim.fn.termopen("posting")
-
-	-- Go into insert mode in terminal
 	vim.api.nvim_set_current_win(win)
 	vim.cmd("startinsert")
 
-	-- Close mappings
-	local opts = { noremap = true, silent = true }
-	local mappings = { "q", "<Esc>", "<C-c>" }
-	for _, key in ipairs(mappings) do
-		vim.api.nvim_buf_set_keymap(buf, "n", key, "<cmd>close<CR>", opts)
-		vim.api.nvim_buf_set_keymap(buf, "t", key, "<C-\\><C-n><cmd>close<CR>", opts)
+	local close_keys = { "q", "<Esc>", "<C-c>" }
+	for _, key in ipairs(close_keys) do
+		map("n", key, "<cmd>close<CR>", { buffer = buf, silent = true })
+		map("t", key, "<C-\\><C-n><cmd>close<CR>", { buffer = buf, silent = true })
 	end
-end, { noremap = true, silent = true, desc = "Open Posting." })
+end, { desc = "Open Posting." })
+
+map("n", "<leader>mm", function()
+	cw.toggle_minimap()
+end, { noremap = true, silent = true, desc = "Toggle Codewindow Minimap" })

@@ -1,4 +1,4 @@
-return function()
+local function config()
 	require("lualine").setup({
 		options = {
 			theme = "horizon",
@@ -54,3 +54,9 @@ return function()
 		extensions = { "neo-tree" },
 	})
 end
+
+return {
+	"nvim-lualine/lualine.nvim",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	config = config,
+}

@@ -1,7 +1,6 @@
 require("options")
+require("lazy-bootstrap")
 require("keymaps")
-require("plugins")
 require("lsp")
-require("configs.treesitter")
 require("ui.alpha").setup()
 require("ui.blankline").setup()
