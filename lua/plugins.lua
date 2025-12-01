@@ -111,13 +111,43 @@ require("lazy").setup({
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("which-key").setup({
+			local wk = require("which-key")
+			wk.setup({
 				-- Only trigger which-key for <leader> and <A-...> keys
 				triggers = {
 					"<leader>",
 				},
 			})
+			wk.add({
+				{ "<leader>b", group = "Buffer Controls" },
+				{ "<leader>f", group = "Telescope" },
+			})
 		end,
+	},
+	{
+		"goolord/alpha-nvim",
+		config = function()
+			require("alpha").setup(require("alpha.themes.dashboard").config)
+		end,
+	},
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		opts = {
+			-- configurations go here
+		},
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {},
 	},
 
 	-------------------------
