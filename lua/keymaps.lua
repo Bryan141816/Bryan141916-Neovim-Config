@@ -3,7 +3,6 @@ local opts = {
 	noremap = true, -- non-recursive
 	silent = true, -- do not show message
 }
-vim.opt.timeoutlen = 500
 -----------------
 -- Normal mode --
 -----------------
@@ -87,7 +86,7 @@ vim.keymap.set("n", "<leader>ba", function()
 			vim.api.nvim_buf_delete(buf, { force = true })
 		end
 	end
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true, desc = "Close all buffers." })
 
 -- Close all buffers except current and special ones like Neo-tree
 vim.keymap.set("n", "<leader>bo", function()
@@ -102,7 +101,7 @@ vim.keymap.set("n", "<leader>bo", function()
 			vim.api.nvim_buf_delete(buf, { force = true })
 		end
 	end
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true, desc = "Close others buffers." })
 
 -- Close buffers to the left of current
 vim.keymap.set("n", "<leader>bl", function()
@@ -121,7 +120,7 @@ vim.keymap.set("n", "<leader>bl", function()
 			end
 		end
 	end
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true, desc = "Close buffers to the left." })
 
 -- Close buffers to the right of current
 vim.keymap.set("n", "<leader>br", function()
@@ -140,7 +139,7 @@ vim.keymap.set("n", "<leader>br", function()
 			end
 		end
 	end
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true, desc = "Close buffers to the right." })
 
 ----------
 --Others--
@@ -176,7 +175,7 @@ vim.keymap.set("n", "<leader>gg", function()
 	vim.api.nvim_buf_set_keymap(buf, "t", "q", "<C-\\><C-n><cmd>close<CR>", { noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(buf, "t", "<Esc>", "<C-\\><C-n><cmd>close<CR>", { noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(buf, "t", "<C-c>", "<C-\\><C-n><cmd>close<CR>", { noremap = true, silent = true })
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true, desc = "Open LazyGit." })
 
 -- Open Posting in a floating terminal
 
@@ -212,4 +211,4 @@ vim.keymap.set("n", "<leader>pp", function()
 		vim.api.nvim_buf_set_keymap(buf, "n", key, "<cmd>close<CR>", opts)
 		vim.api.nvim_buf_set_keymap(buf, "t", key, "<C-\\><C-n><cmd>close<CR>", opts)
 	end
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true, desc = "Open Posting." })

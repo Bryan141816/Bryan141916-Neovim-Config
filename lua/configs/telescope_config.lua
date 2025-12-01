@@ -46,9 +46,34 @@ return function()
 
 	-- Keymaps
 	local map = vim.keymap.set
-	map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true, silent = true })
-	map("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
-	map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { noremap = true, silent = true })
-	map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { noremap = true, silent = true })
-	map("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { noremap = true, silent = true })
+
+	map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", {
+		noremap = true,
+		silent = true,
+		desc = "Find files",
+	})
+
+	map("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", {
+		noremap = true,
+		silent = true,
+		desc = "Search text (live grep)",
+	})
+
+	map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", {
+		noremap = true,
+		silent = true,
+		desc = "List buffers",
+	})
+
+	map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", {
+		noremap = true,
+		silent = true,
+		desc = "Help tags",
+	})
+
+	map("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", {
+		noremap = true,
+		silent = true,
+		desc = "Recent files",
+	})
 end

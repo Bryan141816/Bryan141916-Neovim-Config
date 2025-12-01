@@ -107,6 +107,18 @@ require("lazy").setup({
 			})
 		end,
 	},
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("which-key").setup({
+				-- Only trigger which-key for <leader> and <A-...> keys
+				triggers = {
+					"<leader>",
+				},
+			})
+		end,
+	},
 
 	-------------------------
 	--Completion / Snippets--
@@ -205,7 +217,12 @@ require("lazy").setup({
 			vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", { noremap = true, silent = true })
 			vim.keymap.set("i", "<C-n>", "<Esc>:Neotree toggle<CR>a", { noremap = true, silent = true })
 			vim.keymap.set("s", "<C-n>", "<Esc>:Neotree toggle<CR>gv", { noremap = true, silent = true })
-			vim.keymap.set("n", "<leader>r", ":Neotree reveal<CR>", { noremap = true, silent = true })
+			vim.keymap.set(
+				"n",
+				"<leader>r",
+				":Neotree reveal<CR>",
+				{ noremap = true, silent = true, desc = "Open NeoTree" }
+			)
 		end,
 	},
 	{
