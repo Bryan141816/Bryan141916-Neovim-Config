@@ -3,6 +3,12 @@ return {
 	version = "*", -- Use the latest tagged version
 	opts = {
 		highlight_word = false,
+		pre_hook = function()
+			require("nvim-autopairs").disable()
+		end,
+		post_hook = function()
+			require("nvim-autopairs").enable()
+		end,
 	}, -- This causes the plugin setup function to be called
 	keys = {
 		{ "<C-A-j>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "x" }, desc = "Add cursor and move down" },
@@ -24,7 +30,7 @@ return {
 		},
 
 		{
-			"<Leader>m",
+			"<Leader>C",
 			"<Cmd>MultipleCursorsAddVisualArea<CR>",
 			mode = { "x" },
 			desc = "Add cursors to the lines of the visual area",
