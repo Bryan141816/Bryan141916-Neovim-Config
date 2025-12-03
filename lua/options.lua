@@ -84,3 +84,21 @@ end, { bang = true })
 vim.cmd([[
 cnoreabbrev <expr> q getcmdtype() == ':' && getcmdline() == 'q' ? 'BQ' : 'q'
 ]])
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = "*",
+	callback = function()
+		local buf = vim.api.nvim_get_current_buf()
+		local line = vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1] -- first line
+		if line and #line > 1000 then -- if line is longer than 10k chars
+			-- Disable expensive things
+			vim.opt_local.wrap = false -- no wrapping
+			vim.opt_local.cursorline = false -- don’t highlight cursor line
+			vim.opt_local.foldmethod = "manual"
+			vim.opt_local.syntax = "off"
+			vim.opt_local.conceallevel = 0
+			vim.opt_local.lazyredraw = true
+			print("Long line detected, features disabled")
+		end
+	end,
+})

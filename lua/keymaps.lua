@@ -246,6 +246,8 @@ map("n", "<leader>pp", function()
 	end
 end, { desc = "Open Posting." })
 
+local cw = require("codewindow")
+
 map("n", "<leader>mm", function()
 	cw.toggle_minimap()
 end, { noremap = true, silent = true, desc = "Toggle Codewindow Minimap" })
