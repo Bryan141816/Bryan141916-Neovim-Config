@@ -183,7 +183,7 @@ local term = require("custom.terminal")
 map("n", "<A-h>", term.horiz_toggle, { noremap = true, silent = true })
 map("n", "<A-v>", term.vert_toggle, { noremap = true, silent = true })
 map("n", "<A-f>", term.float_toggle, { noremap = true, silent = true })
-
+map("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 ----------
 -- Others --
 ----------
